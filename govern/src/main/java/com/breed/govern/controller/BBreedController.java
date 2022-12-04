@@ -16,7 +16,6 @@ import java.util.List;
 /**
  * <p>
  * 前端控制器
- * </p>
  *
  * @author 王进
  * @since 2022-12-03
@@ -68,13 +67,9 @@ public class BBreedController {
     public CommonResult deleteBreed(@PathVariable Long id) {
         Integer count = breedService.deleteBreed(id);
         if (count > 0) {
-
             return CommonResult.success(count);
         } else {
             return CommonResult.failed();
         }
     }
-
-
-
 }

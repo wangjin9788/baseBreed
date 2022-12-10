@@ -63,27 +63,7 @@ export const asyncRouterMap = [
         meta: {title: '修改养殖信息'},
         hidden: true
       },
-      {
-        path: 'breedDetail',
-        name: 'breedDetail',
-        component: () => import('@/views/breed/breedInfo/detail/index'),
-        meta: {title: '养殖详情信息'},
-        hidden: true
-      },
-      {
-        path: 'addBreedDetail',
-        name: 'addBreedDetail',
-        component: () => import('@/views/breed/breedInfo/detail/add'),
-        meta: {title: '添加养殖详情'},
-        hidden: true
-      },
-      {
-        path: 'updateBreedDetail',
-        name: 'updateBreedDetail',
-        component: () => import('@/views/breed/breedInfo/detail/update'),
-        meta: {title: '修改养殖详情'},
-        hidden: true
-      },
+
       {
         path: 'breedModel',
         name: 'breedModel',
@@ -102,6 +82,110 @@ export const asyncRouterMap = [
         name: 'updateBreedModel',
         component: () => import('@/views/breed/breedModel/update'),
         meta: {title: '修改养殖信息'},
+        hidden: true
+      },
+      {
+        path: 'operation',
+        name: 'operation',
+        component: () => import('@/views/breed/operation/index'),
+        meta: {title: '养殖操作信息'},
+        hidden: true
+      },
+      {
+        path: 'addOperation',
+        name: 'addOperation',
+        component: () => import('@/views/breed/operation/add'),
+        meta: {title: '添加操作信息'},
+        hidden: true
+      },
+      {
+        path: 'updateOperation',
+        name: 'updateOperation',
+        component: () => import('@/views/breed/operation/update'),
+        meta: {title: '修改操作信息'},
+        hidden: true
+      },
+      {
+        path: 'addOperationLabel',
+        name: 'addOperationLabel',
+        component: () => import('@/views/breed/operationLabel/add'),
+        meta: {title: '添加操作标签信息'},
+        hidden: true
+      },
+      {
+        path: 'updateOperationLabel',
+        name: 'updateOperationLabel',
+        component: () => import('@/views/breed/operationLabel/update'),
+        meta: {title: '修改操作标签信息'},
+        hidden: true
+      },
+      {
+        path: 'testing',
+        name: 'testing',
+        component: () => import('@/views/breed/testing/index'),
+        meta: {title: '检测信息'},
+        hidden: true
+      },
+      {
+        path: 'addTesting',
+        name: 'addTesting',
+        component: () => import('@/views/breed/testing/add'),
+        meta: {title: '添加检测信息'},
+        hidden: true
+      },
+      {
+        path: 'updateTesting',
+        name: 'updateTesting',
+        component: () => import('@/views/breed/testing/update'),
+        meta: {title: '修改检测信息'},
+        hidden: true
+      },
+      {
+        path: 'addExcLabel',
+        name: 'addExcLabel',
+        component: () => import('@/views/breed/excLabel/add'),
+        meta: {title: '添加异常标签信息'},
+        hidden: true
+      },
+      {
+        path: 'updateExcLabel',
+        name: 'updateExcLabel',
+        component: () => import('@/views/breed/excLabel/update'),
+        meta: {title: '修改异常标签信息'},
+        hidden: true
+      },
+      {
+        path: 'summary',
+        name: 'summary',
+        component: () => import('@/views/breed/treatSummary/index'),
+        meta: {title: '治疗总结',icon: 'product-comment'}
+      },
+      {
+        path: 'excInfo',
+        name: 'excInfo',
+        component: () => import('@/views/breed/excInfo/index'),
+        meta: {title: '治疗信息'},
+        hidden: true
+      },
+      {
+        path: 'excOperation',
+        name: 'excOperation',
+        component: () => import('@/views/breed/excOperation/index'),
+        meta: {title: '治疗操作信息'},
+        hidden: true
+      },
+      {
+        path: 'addExcOperation',
+        name: 'addExcOperation',
+        component: () => import('@/views/breed/excOperation/add'),
+        meta: {title: '添加治疗操作信息'},
+        hidden: true
+      },
+      {
+        path: 'updateExcOperation',
+        name: 'updateExcOperation',
+        component: () => import('@/views/breed/excOperation/update'),
+        meta: {title: '修改治疗操作信息'},
         hidden: true
       },
     ]
@@ -151,6 +235,55 @@ export const asyncRouterMap = [
         name: 'updateFerment',
         component: () => import('@/views/feed/ferment/update'),
         meta: {title: '修改发酵'},
+        hidden: true
+      },
+    ]
+  },
+  {
+    path: '/diseaseInfo',
+    component: Layout,
+    redirect: '/diseaseInfo',
+    name: 'diseaseInfo',
+    meta: {title: '病理管理', icon: 'product-comment'},
+    children: [
+      {
+        path: 'animalDisease',
+        name: 'animalDisease',
+        component: () => import('@/views/diseaseInfo/animalDisease/index'),
+        meta: {title: '病理信息',icon: 'product-comment'}
+      },
+      {
+        path: 'addAnimalDisease',
+        name: 'addAnimalDisease',
+        component: () => import('@/views/diseaseInfo/animalDisease/add'),
+        meta: {title: '添加养殖信息'},
+        hidden: true
+      },
+      {
+        path: 'updateAnimalDisease',
+        name: 'updateAnimalDisease',
+        component: () => import('@/views/diseaseInfo/animalDisease/update'),
+        meta: {title: '修改养殖信息'},
+        hidden: true
+      },
+      {
+        path: 'nature',
+        name: 'nature',
+        component: () => import('@/views/diseaseInfo/nature/index'),
+        meta: {title: '病理性质'},
+      },
+      {
+        path: 'addNature',
+        name: 'addNature',
+        component: () => import('@/views/diseaseInfo/nature/add'),
+        meta: {title: '添加病理性质'},
+        hidden: true
+      },
+      {
+        path: 'updateNature',
+        name: 'updateNature',
+        component: () => import('@/views/diseaseInfo/nature/update'),
+        meta: {title: '修改病理性质'},
         hidden: true
       },
     ]

@@ -4,6 +4,7 @@ package com.breed.govern.controller;
 import com.breed.govern.common.api.CommonResult;
 import com.breed.govern.dto.vo.BreedListVo;
 import com.breed.govern.dto.vo.BreedModelListVo;
+import com.breed.govern.dto.vo.SelectBreedModelListVo;
 import com.breed.govern.entity.BBreedingMode;
 import com.breed.govern.entity.BFeedFerment;
 import com.breed.govern.entity.BFeedInfo;
@@ -72,5 +73,10 @@ public class BBreedingModeController {
     @GetMapping(value = "/info/{id}")
     public CommonResult<BBreedingMode> getFeedFermentById(@PathVariable Integer id) {
         return CommonResult.success(modeService.getBreedingModeById(id));
+    }
+    @ApiOperation("选择模型数据")
+    @GetMapping(value = "/select/list")
+    public CommonResult<List<SelectBreedModelListVo>> selectBreedModelListVo() {
+        return CommonResult.success(modeService.selectBreedModelListVoList());
     }
 }

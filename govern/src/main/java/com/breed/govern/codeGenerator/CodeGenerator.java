@@ -108,10 +108,9 @@ public class CodeGenerator {
 
         strategy.setEntityLombokModel(true);
         strategy.setRestControllerStyle(true);
-        // 公共父类
 
         // 写于父类中的公共字
-        strategy.setInclude("b_feed_info");
+        strategy.setInclude("b_exc_operation");
         strategy.setControllerMappingHyphenStyle(true);
         strategy.setTablePrefix(pc.getModuleName() + "_");
         mpg.setStrategy(strategy);

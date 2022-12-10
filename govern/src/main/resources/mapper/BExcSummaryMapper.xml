@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.breed.govern.mapper.BExcSummaryMapper">
+    <select id="getSummaryByLabel" resultType="com.breed.govern.dto.vo.ExcInfoDisease">
+        SELECT s.disease_name as diseaseName,
+               s.pathogeny,
+               s.symptom,
+               s.treatment
+        FROM b_exc_summary s
+        WHERE
+            MATCH (symptom) AGAINST ( #{data} IN NATURAL LANGUAGE MODE
+            )
+            LIMIT 1
+    </select>
+</mapper>

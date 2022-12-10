@@ -4,6 +4,7 @@ package com.breed.govern.controller;
 import com.breed.govern.common.api.CommonResult;
 import com.breed.govern.dto.vo.BreedListVo;
 import com.breed.govern.entity.BBreed;
+import com.breed.govern.entity.BFeedFerment;
 import com.breed.govern.service.IBBreedService;
 import com.breed.govern.service.impl.BBreedServiceImpl;
 import io.swagger.annotations.Api;
@@ -71,5 +72,11 @@ public class BBreedController {
         } else {
             return CommonResult.failed();
         }
+    }
+
+    @ApiOperation("根据id获取发酵信息")
+    @GetMapping(value = "/info/{id}")
+    public CommonResult<BBreed> getBreedById(@PathVariable Integer id) {
+        return CommonResult.success(breedService.getBreedById(id));
     }
 }

@@ -2,6 +2,7 @@ package com.breed.govern.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.breed.govern.dto.vo.BreedModelListVo;
+import com.breed.govern.dto.vo.SelectBreedModelListVo;
 import com.breed.govern.entity.BBreedingMode;
 
 import java.util.List;
@@ -25,4 +26,6 @@ public interface IBBreedingModeService extends IService<BBreedingMode> {
     BBreedingMode getBreedingModeById( Integer id);
 
     List<BreedModelListVo> getModelList();
+
+    List<SelectBreedModelListVo> selectBreedModelListVoList();
 }

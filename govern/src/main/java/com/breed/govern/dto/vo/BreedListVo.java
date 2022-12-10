@@ -7,20 +7,20 @@ import java.util.Date;
 @Data
 public class BreedListVo {
     private long bid;
-    //投入时间
-    private String inputTime;
-    //投入重量
-    private float inputWeight;
-    //产出时间
-    private String proTime;
-    //产出重量
-    private float proWeight;
-    //养殖模式
-    private String pattern;
-    //状态
-    private int status;
     //栏位编号
     private int number;
-    //类型(0:室内  1：室外)
+    //养殖类型(0:室内  1：室外)
     private int type;
+    //养殖方式
+    private String breedModel;
+    //养殖面积
+    private double extent;
+    //投入重量
+    private float inputWeight;
+    //状态
+    private int status;
+    //健康标志
+    private int breedMark;
+    //投入时间
+    private String inputTime;
 }

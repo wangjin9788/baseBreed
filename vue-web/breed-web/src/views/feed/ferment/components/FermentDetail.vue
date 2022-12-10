@@ -51,6 +51,7 @@ export default {
   data() {
     return {
       ferment: Object.assign({}, defaultFerment),
+      content: '',
     }
   },
   created() {
@@ -117,6 +118,9 @@ export default {
       this.ferment = Object.assign({}, defaultFerment);
       this.getSelectFermentList();
     },
+    callbackChangeEditor (value) {
+      this.content = value
+    }
   }
 }
 </script>

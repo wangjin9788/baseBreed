@@ -21,7 +21,8 @@
       <div style="margin-top: 15px">
         <el-form :inline="true" :model="listQuery" size="small" label-width="140px">
           <el-form-item label="输入搜索：">
-            <el-date-picker v-model="listQuery.selectDay" type="date" placeholder="选择日" @change="handleResetSearch" value-format="yyyy-MM-dd"></el-date-picker>
+            <el-date-picker v-model="listQuery.selectDay" type="date" placeholder="选择日" @change="handleResetSearch"
+                            value-format="yyyy-MM-dd"></el-date-picker>
           </el-form-item>
         </el-form>
       </div>
@@ -41,6 +42,8 @@
       <el-table ref="revenueTable"
                 :data="list"
                 style="width: 100%;"
+
+                :cell-class-name="back"
                 v-loading="listLoading" border>
         <el-table-column label="编号" width="100" align="center" v-if='false'>
           <template slot-scope="scope">{{ scope.row.bid }}</template>
@@ -48,18 +51,64 @@
         <el-table-column label="栏位编号" width="100" align="center">
           <template slot-scope="scope">{{ scope.row.number }}</template>
         </el-table-column>
-        <el-table-column label="养殖模式" align="center">
-          <template slot-scope="scope">{{ scope.row.pattern }}</template>
+        <el-table-column label="养殖环境" align="center">
+          <template slot-scope="scope">
+            <span v-if="scope.row.pattern==0">室内</span>
+            <span v-else>室外</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="养殖方式" align="center">
+          <template slot-scope="scope">{{ scope.row.breedModel }}</template>
+        </el-table-column>
+        <el-table-column label="养殖面积㎡" align="center">
+          <template slot-scope="scope">{{ scope.row.extent }}</template>
+        </el-table-column>
+        <el-table-column label="投入重量(斤)" align="center">
+          <template slot-scope="scope">{{ scope.row.inputWeight }}</template>
+        </el-table-column>
+        <el-table-column label="健康状态" align="center">
+          <template slot-scope="scope">{{ scope.row.breedMark }}</template>
+        </el-table-column>
+        <el-table-column label="养殖状态" width="100" align="center">
+          <template slot-scope="scope">
+            <el-switch
+              @change="handleStatusChange(scope.$index, scope.row)"
+              :active-value="1"
+              :inactive-value="0"
+              v-model="scope.row.status">
+            </el-switch>
+          </template>
         </el-table-column>
         <el-table-column label="投入时间" align="center">
           <template slot-scope="scope">{{ scope.row.inputTime }}</template>
         </el-table-column>
-        <el-table-column label="投入重量" align="center">
-          <template slot-scope="scope">{{ scope.row.inputWeight }}</template>
-        </el-table-column>
+        <el-table-column label="操作信息" width="160" align="center">
+          <template slot-scope="scope">
+            <el-row>
+              <el-button
+                size="mini"
+                type="text"
+                @click="handleTesting(scope.$index, scope.row)">检测信息
+              </el-button>
+              <el-button size="mini"
+                         type="text"
+                         @click="handleOperation(scope.$index, scope.row)">日常操作
+              </el-button>
 
-        <el-table-column label="创建时间" align="center">
-          <template slot-scope="scope">{{ scope.row.inputTime }}</template>
+            </el-row>
+            <el-row>
+              <el-button
+                size="mini"
+                type="text"
+                @click="handleTreatment(scope.$index, scope.row)">治疗信息
+              </el-button>
+              <el-button size="mini"
+                         type="text"
+                         @click="handleMeasure(scope.$index, scope.row)">生长检查信息
+              </el-button>
+            </el-row>
+           <>
+          </template>
         </el-table-column>
         <el-table-column label="操作" width="160" align="center">
           <template slot-scope="scope">
@@ -115,6 +164,11 @@ export default {
   },
 
   methods: {
+    back(row){
+      if(row.breedMark==0){
+          return 'selectClass';
+      }
+    },
     /**搜索结果 **/
     handleSearchList() {
       this.listQuery.pageNum = 1;
@@ -143,7 +197,18 @@ export default {
     handleUpdate(index, row) {
       this.$router.push({path: '/breed/updateBreed', query: {id: row.bid}});
     },
-
+    /**日常操作 **/
+    handleOperation(index, row) {
+      this.$router.push({path: '/breed/operation', query: {bid: row.bid}});
+    },
+    /**检测信息跳转 **/
+    handleTesting(index, row) {
+      this.$router.push({path: '/breed/testing', query: {bid: row.bid}});
+    },
+    /**检测信息跳转 **/
+    handleTreatment(index, row) {
+      this.$router.push({path: '/breed/excInfo', query: {bid: row.bid}});
+    },
     /** 删除页面**/
     handleDelete(index, row) {
       this.$confirm('是否要删除该养殖记录?', '提示', {
@@ -175,6 +240,11 @@ export default {
   }
 }
 </script>
-<style></style>
+<style>
+
+.selectClass {
+  background-color: #67C23A;
+}
+</style>
 
 

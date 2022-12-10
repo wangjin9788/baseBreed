@@ -36,3 +36,10 @@ export function getBreedModelInfo(id) {
     method: 'get'
   })
 }
+
+export function selectModelList() {
+  return request({
+    url: '/breed-model/select/list',
+    method: 'get',
+  })
+}

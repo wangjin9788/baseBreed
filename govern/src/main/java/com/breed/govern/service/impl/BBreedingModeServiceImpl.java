@@ -1,6 +1,7 @@
 package com.breed.govern.service.impl;
 
 import com.breed.govern.dto.vo.BreedModelListVo;
+import com.breed.govern.dto.vo.SelectBreedModelListVo;
 import com.breed.govern.entity.BBreedingMode;
 import com.breed.govern.mapper.BBreedingModeMapper;
 import com.breed.govern.service.IBBreedingModeService;
@@ -43,5 +44,10 @@ public class BBreedingModeServiceImpl extends ServiceImpl<BBreedingModeMapper, B
     @Override
     public List<BreedModelListVo> getModelList() {
         return baseMapper.getBreedModelList();
+    }
+
+    @Override
+    public List<SelectBreedModelListVo> selectBreedModelListVoList(){
+        return baseMapper.selectBreedModelList();
     }
 }

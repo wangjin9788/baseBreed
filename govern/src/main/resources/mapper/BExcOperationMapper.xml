@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.breed.govern.mapper.BExcOperationMapper">
+<select id="getExcOperationList" resultType="com.breed.govern.dto.vo.ExcOperationListVo">
+    SELECT
+        o.eo_id AS eoId,
+        o.operation AS operation,
+        o.effect AS effect,
+        i.symptom AS sympom,
+        o.create_time AS createTime
+    FROM
+        b_exc_operation o
+            LEFT JOIN b_exc_info i ON i.e_id = o.e_id
+    where  o.e_id=#{id}
+    ORDER BY
+        o.create_time DESC
+</select>
+</mapper>

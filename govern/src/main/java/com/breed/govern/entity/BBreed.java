@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
 import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -29,58 +31,47 @@ public class BBreed implements Serializable {
     @TableId(value = "b_id", type = IdType.AUTO)
     private Long bId;
 
-    /**
-     * 养殖模式
-     */
-    private Long bmId;
-
-    /**
-     * 标志（0：健康  1：一般  2：有问题）
-     */
-    private Integer mark;
 
     /**
      * 养殖编号
      */
     private Integer number;
+    /**
+     * 养殖模式
+     */
+    private Long bmId;
+    /**
+     * 类型(0:室内  1：室外)
+     */
+    private Integer type;
 
     /**
      * 投入时间
      */
-    private LocalDateTime inputTime;
+    private String inputTime;
 
+    /**
+     * 投入重量
+     */
+    private Double inputWeight;
+    /**
+     * 养殖面积
+     */
+    private Double extent;
+    /**
+     * 标志（0：健康  1：一般  2：有问题）
+     */
+    private Integer breedMark;
     /**
      * 状态（0：养殖中 1：结束）
      */
     private Integer status;
 
     /**
-     * 结束时间
-     */
-    private LocalDateTime endTime;
-
-    /**
-     * 投入重量
-     */
-    private Double inputWeight;
-
-    /**
-     * 产出重量
-     */
-    private Double outWeight;
-
-    /**
-     * 养殖面积
-     */
-    private Double extent;
-
-    /**
      * 创建时间
      */
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
     private LocalDateTime createTime;
-    /**
-     * 类型(0:室内  1：室外)
-     */
-    private Integer type;
+
 
 }

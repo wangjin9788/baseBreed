@@ -110,7 +110,7 @@ public class CodeGenerator {
         strategy.setRestControllerStyle(true);
 
         // 写于父类中的公共字
-        strategy.setInclude("b_exc_operation");
+        strategy.setInclude("b_ferment_testing");
         strategy.setControllerMappingHyphenStyle(true);
         strategy.setTablePrefix(pc.getModuleName() + "_");
         mpg.setStrategy(strategy);

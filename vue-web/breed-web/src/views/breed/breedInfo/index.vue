@@ -60,6 +60,13 @@
         <el-table-column label="养殖方式" align="center">
           <template slot-scope="scope">{{ scope.row.breedModel }}</template>
         </el-table-column>
+        <el-table-column label="养殖规格" align="center">
+          <template slot-scope="scope">
+            <span v-if="scope.row.specifications==1">小蚯蚓</span>
+            <span v-else-if="scope.row.specifications==2">中蚯蚓</span>
+            <span v-else="scope.row.specifications==1">大蚯蚓</span>
+          </template>
+        </el-table-column>
         <el-table-column label="养殖面积㎡" align="center">
           <template slot-scope="scope">{{ scope.row.extent }}</template>
         </el-table-column>

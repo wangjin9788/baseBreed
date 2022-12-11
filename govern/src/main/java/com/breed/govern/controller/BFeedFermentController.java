@@ -2,11 +2,11 @@ package com.breed.govern.controller;
 
 
 import com.breed.govern.common.api.CommonResult;
-import com.breed.govern.dto.param.FermentParam;
+import com.breed.govern.dto.param.FermentEndTestingParam;
 import com.breed.govern.dto.vo.FermentListVo;
 import com.breed.govern.dto.vo.SelectFermentListVo;
-import com.breed.govern.entity.BBreed;
 import com.breed.govern.entity.BFeedFerment;
+import com.breed.govern.entity.BFermentTesting;
 import com.breed.govern.service.IBFeedFermentService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -84,4 +84,15 @@ public class BFeedFermentController {
     public CommonResult<List<SelectFermentListVo>> getSelectFermentList() {
         return CommonResult.success(fermentService.getSelectFermentList());
     }
+
+    @ApiOperation("修改状态")
+    @PostMapping("/update/status")
+    public CommonResult updateStatus(@RequestBody BFermentTesting data) {
+        Integer count = fermentService.updateStatus(data);
+        if(count>0){
+            return CommonResult.success(count);
+        }
+      return  CommonResult.failed();
+    }
+
 }

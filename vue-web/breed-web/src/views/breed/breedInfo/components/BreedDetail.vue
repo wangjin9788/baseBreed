@@ -31,12 +31,22 @@
         </el-select>
       </el-form-item>
       <el-form-item label="健康状态：">
-        <el-select v-model="breed.breedMark" placeholder="请选择环境" style="display: block">
+        <el-select v-model="breed.breedMark" placeholder="请选择状态" style="display: block">
           <el-option
             v-for="item in healthyOption"
             :key="item.breedMark"
             :label="item.value"
             :value="item.breedMark">
+          </el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item label="规格：">
+        <el-select v-model="breed.breedMark" placeholder="请选择规格" style="display: block">
+          <el-option
+            v-for="item in specificationsOption"
+            :key="item. specifications"
+            :label="item.value"
+            :value="item. specifications">
           </el-option>
         </el-select>
       </el-form-item>
@@ -92,7 +102,8 @@ export default {
         this.selectBreedLists = response.data;
       }),
       evnOptions: [{type: 0, value: '室内'}, {type: 1, value: '室外'}],
-      healthyOption: [{breedMark: 0, value: '健康'}, {breedMark: 1, value: '一般'}, {breedMark: 1, value: '差'}]
+      healthyOption: [{breedMark: 0, value: '健康'}, {breedMark: 1, value: '一般'}, {breedMark: 1, value: '差'}],
+      specificationsOption: [{specifications: 1, value: '小蚯蚓'}, {specifications: 2, value: '中蚯蚓'}, {specifications: 3, value: '大蚯蚓'}]
     }
   },
   created() {

@@ -29,13 +29,6 @@
     <el-card class="operate-container" shadow="never">
       <i class="el-icon-tickets"></i>
       <span>数据列表</span>
-      <el-button
-        type="primary"
-        class="btn-add"
-        @click="handleAddBreed()"
-        size="mini">
-        添加
-      </el-button>
     </el-card>
     <div class="table-container">
       <el-table ref="revenueTable"
@@ -43,65 +36,25 @@
                 style="width: 100%;"
                 v-loading="listLoading" border>
         <el-table-column label="编号" width="100" align="center" >
-          <template slot-scope="scope">{{ scope.row.ffId }}</template>
+          <template slot-scope="scope">{{ scope.row.ftId }}</template>
         </el-table-column>
-        <el-table-column label="发酵原料" align="center">
-          <template slot-scope="scope">{{ scope.row.fermentInfo }}</template>
+        <el-table-column label="温度" align="center">
+          <template slot-scope="scope">{{ scope.row.temp }}</template>
         </el-table-column>
-        <el-table-column label="发酵天数" align="center">
-          <template slot-scope="scope">{{ scope.row.fermentDay }}</template>
+        <el-table-column label="ph" align="center">
+          <template slot-scope="scope">{{ scope.row.ph }}</template>
         </el-table-column>
-        <el-table-column label="状态" align="center">
+        <el-table-column label="气味" align="center">
           <template slot-scope="scope">
-            <span v-if="scope.row.status==0">发酵中</span>
-            <span v-else>发酵结束</span> </template>
+            <span v-if="scope.row.status==0">无</span>
+            <span v-else>有</span> </template>
         </el-table-column>
-
         <el-table-column label="图片" align="center">
           <template slot-scope="scope">
-            <img style="height:80px" v-image-preview :src="scope.row.createImage">
+            <img style="height:80px" v-image-preview :src="scope.row.imgUrl">
           </template>
         </el-table-column>
-        <el-table-column label="发酵时间" align="center">
-          <template slot-scope="scope">{{ scope.row.fermentTime }}</template>
-        </el-table-column>
-        <el-table-column label="结束标识" width="100" align="center">
-          <template slot-scope="scope">
-            <el-switch
-              @change="handleStatusChange(scope.$index, scope.row)"
-              :active-value="1"
-              :inactive-value="0"
-              v-model="scope.row.status"
-              :disabled="scope.row.status==1 ? true:false">
-            </el-switch>
-          </template>
-        </el-table-column>
-        <el-table-column label="查看数据" width="160" align="center">
-          <template slot-scope="scope">
-            <el-row>
-              <el-button
-                size="mini"
-                type="text"
-                @click="handleEndTestingInfo(scope.$index, scope.row)">结束检测信息
-              </el-button>
-            </el-row>
-          </template>
-        </el-table-column>
-        <el-table-column label="操作" width="160" align="center">
-          <template slot-scope="scope">
-            <el-row>
-              <el-button
-                size="mini"
-                type="text"
-                @click="handleUpdate(scope.$index, scope.row)">编辑
-              </el-button>
-              <el-button size="mini"
-                         type="text"
-                         @click="handleDelete(scope.$index, scope.row)">删除
-              </el-button>
-            </el-row>
-          </template>
-        </el-table-column>
+
       </el-table>
     </div>
     <div class="pagination-container">
@@ -119,12 +72,13 @@
   </div>
 </template>
 <script>
-import {fetchList, deleteFerment} from '@/api/ferment';
+import {fetchList} from '@/api/fermentTesting';
 
 const defaultListQuery = {
   pageNum: 1,
   pageSize: 5,
   selectDay:'',
+  ffId:0,
 };
 export default {
 
@@ -166,40 +120,10 @@ export default {
     handleAddBreed() {
       this.$router.push('/feed/addFerment');
     },
-    /**跳转添加结束 **/
-    handleStatusChange(index, row) {
-      this.$confirm('添加检测信息', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(() => {
-        this.$router.push({path:'/feed/addFermentTesting',query: {id: row.ffId}});
-      })
-    },
+
     /**跳转编辑 **/
     handleUpdate(index, row) {
       this.$router.push({path: '/feed/updateFerment', query: {id: row.ffId}});
-    },
-    /**跳转查看结束信息 **/
-    handleEndTestingInfo(index, row) {
-      this.$router.push({path: '/feed/fermentTesting', query: {id: row.ffId}});
-    },
-
-    /** 删除页面**/
-    handleDelete(index, row) {
-      this.$confirm('是否要删除该养殖记录?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(() => {
-        deleteFerment(row.ffId).then(response => {
-          this.$message({
-            type: 'success',
-            message: '删除成功!'
-          });
-          this.getList();
-        });
-      });
     },
     /**
      * 加载页面数据
@@ -211,6 +135,7 @@ export default {
       var monthn = now.getMonth() + 1;
       var yearn = now.getFullYear();
       this.selectDay = yearn + "-" + monthn;
+      this.listQuery.ffId=this.$route.query.id;
       fetchList(this.listQuery).then(response => {
         this.listLoading = false;
         this.list = response.data;

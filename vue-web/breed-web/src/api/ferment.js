@@ -15,6 +15,13 @@ export function createFerment(data) {
     data: data
   })
 }
+export function updateFermentStatus(data) {
+  return request({
+    url: '/feed-ferment/update/status',
+    method: 'post',
+    data: data
+  })
+}
 
 export function updateFerment(data) {
   return request({

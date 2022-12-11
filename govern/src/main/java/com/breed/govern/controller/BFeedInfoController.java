@@ -31,7 +31,7 @@ public class BFeedInfoController {
     private IBFeedInfoService infoService;
     @ApiOperation("添加发酵信息")
     @PostMapping(value = "/create")
-    public CommonResult createBreed(@RequestBody BFeedInfo feedInfo) {
+    public CommonResult createFeedInfo(@RequestBody BFeedInfo feedInfo) {
 
         int count = infoService.createFeedInfo(feedInfo);
         if (count > 0) {

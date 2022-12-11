@@ -1,11 +1,11 @@
 package com.breed.govern.service;
 
+import com.breed.govern.dto.param.FermentEndTestingParam;
 import com.breed.govern.dto.vo.FermentListVo;
 import com.breed.govern.dto.vo.SelectFermentListVo;
-import com.breed.govern.entity.BBreed;
 import com.breed.govern.entity.BFeedFerment;
 import com.baomidou.mybatisplus.extension.service.IService;
-import org.springframework.web.bind.annotation.PathVariable;
+import com.breed.govern.entity.BFermentTesting;
 
 import java.util.List;
 
@@ -23,6 +23,8 @@ public interface IBFeedFermentService extends IService<BFeedFerment> {
     int updateFeedFerment(BFeedFerment ferment);
 
     Integer deleteFeedFerment(long id);
+
+    Integer updateStatus(BFermentTesting data);
 
     List<FermentListVo> getFermentList( String selectDay);
 

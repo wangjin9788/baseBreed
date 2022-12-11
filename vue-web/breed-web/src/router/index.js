@@ -237,6 +237,20 @@ export const asyncRouterMap = [
         meta: {title: '修改发酵'},
         hidden: true
       },
+      {
+        path: 'addFermentTesting',
+        name: 'addFermentTesting',
+        component: () => import('@/views/feed/ferment/testing/testingDetail'),
+        meta: {title: '添加发酵结束检测'},
+        hidden: true
+      },
+      {
+        path: 'fermentTesting',
+        name: 'fermentTesting',
+        component: () => import('@/views/feed/ferment/testing/index'),
+        meta: {title: '查看发酵结束检测信息'},
+        hidden: true
+      },
     ]
   },
   {

@@ -23,4 +23,6 @@ public class BreedListVo {
     private int breedMark;
     //投入时间
     private String inputTime;
+    //规格
+    private int  specifications;
 }

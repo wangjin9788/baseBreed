@@ -73,5 +73,9 @@ public class BBreed implements Serializable {
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
     private LocalDateTime createTime;
 
+    /**
+     *规格（1：小蚯蚓 2：中蚯蚓  3：大蚯蚓）
+     */
+    private int specifications;
 
 }

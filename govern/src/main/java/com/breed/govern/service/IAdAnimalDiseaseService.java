@@ -2,9 +2,7 @@ package com.breed.govern.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.breed.govern.dto.vo.AdNatureListVo;
-import com.breed.govern.dto.vo.ExcInfoDisease;
 import com.breed.govern.entity.AdAnimalDisease;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -28,5 +26,5 @@ public interface IAdAnimalDiseaseService extends IService<AdAnimalDisease> {
 
     List<AdNatureListVo> getAdAnimalDiseaseList();
 
-    ExcInfoDisease getDiseaseExcInfo(String data);
+    long getDiseaseExcInfo(String data);
 }

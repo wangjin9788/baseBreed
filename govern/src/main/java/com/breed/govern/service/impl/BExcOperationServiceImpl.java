@@ -1,6 +1,7 @@
 package com.breed.govern.service.impl;
 
 import com.breed.govern.dto.vo.ExcOperationListVo;
+import com.breed.govern.dto.vo.GetExcOperationInfo;
 import com.breed.govern.entity.BExcOperation;
 import com.breed.govern.entity.BOperation;
 import com.breed.govern.mapper.BExcOperationMapper;
@@ -8,6 +9,7 @@ import com.breed.govern.service.IBExcOperationService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -23,6 +25,7 @@ public class BExcOperationServiceImpl extends ServiceImpl<BExcOperationMapper, B
 
     @Override
     public int createExcOperation(BExcOperation data) {
+        data.setCreateTime(LocalDateTime.now());
         return baseMapper.insert(data);
     }
 
@@ -33,7 +36,8 @@ public class BExcOperationServiceImpl extends ServiceImpl<BExcOperationMapper, B
 
     @Override
     public List<ExcOperationListVo> getExcOperationList(long eid) {
-        return baseMapper.getExcOperationList(eid);
+        List<ExcOperationListVo> excOperationList = baseMapper.getExcOperationList(eid);
+        return excOperationList;
     }
 
     @Override
@@ -42,7 +46,16 @@ public class BExcOperationServiceImpl extends ServiceImpl<BExcOperationMapper, B
     }
 
     @Override
+    public List<GetExcOperationInfo> getExcOperationByEid(Integer id) {
+        return baseMapper.getExcOperationByEid(id);
+    }
+
+    @Override
     public Integer deleteExcOperation(long id) {
         return baseMapper.deleteById(id);
+    }
+
+    public String getOperationByeId(long eId){
+        return baseMapper.getOperationByeId(eId);
     }
 }

@@ -1,19 +1,15 @@
 package com.breed.govern.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
-import com.breed.govern.dto.vo.ExcInfoDisease;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.breed.govern.dto.vo.TestingListVo;
-import com.breed.govern.entity.AdAnimalDisease;
 import com.breed.govern.entity.BExcInfo;
-import com.breed.govern.entity.BExcSummary;
 import com.breed.govern.entity.BTesting;
 import com.breed.govern.mapper.BExcInfoMapper;
 import com.breed.govern.mapper.BTestingMapper;
 import com.breed.govern.service.IAdAnimalDiseaseService;
 import com.breed.govern.service.IBExcSummaryService;
 import com.breed.govern.service.IBTestingService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.mysql.cj.xdevapi.JsonArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -91,22 +87,19 @@ public class BTestingServiceImpl extends ServiceImpl<BTestingMapper, BTesting> i
              labelInfo = baseMapper.getLabelInfo(strings);
         }
         //获取总结表信息
-        ExcInfoDisease excInfoDisease = summaryService.getSummaryByLabel(labelInfo);
-        if(excInfoDisease==null){
+        long adId = summaryService.getSummaryByLabel(labelInfo);
+        if(adId==0){
             //获取疾病信息表
-            excInfoDisease = diseaseService.getDiseaseExcInfo(labelInfo);
+            adId = diseaseService.getDiseaseExcInfo(labelInfo);
         }
-        if(excInfoDisease!=null){
+        if(adId>0){
             BExcInfo excInfo = new BExcInfo();
             excInfo.setBId(data.getBId());
             excInfo.setLabelName(labelInfo);
             excInfo.setType(data.getType());
             excInfo.setCreateTime(LocalDateTime.now());
-            excInfo.setPathogeny(excInfoDisease.getPathogeny());
-            excInfo.setSymptom(excInfoDisease.getSymptom());
-            excInfo.setTreatment(excInfoDisease.getTreatment());
-            excInfo.setDiseaseName(excInfoDisease.getDiseaseName());
-            excInfo.setStatus(1);
+            excInfo.setAdId(adId);
+            excInfo.setStatus(0);
             excInfo.setOId(data.getOId());
             excInfoMapper.insert(excInfo);
         }

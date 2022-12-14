@@ -72,5 +72,7 @@ public class BExcSummary implements Serializable {
      * 最佳治疗方案
      */
     private String bestSolution;
+    private long adId;
+
 
 }

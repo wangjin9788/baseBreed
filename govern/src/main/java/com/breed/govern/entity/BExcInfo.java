@@ -2,6 +2,9 @@ package com.breed.govern.entity;
 
 import java.time.LocalDateTime;
 import java.io.Serializable;
+
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -24,6 +27,7 @@ public class BExcInfo implements Serializable {
     /**
      * 异常表id
      */
+    @TableId(value = "e_id", type = IdType.AUTO)
     private Long eId;
 
     /**
@@ -46,29 +50,13 @@ public class BExcInfo implements Serializable {
      */
     private LocalDateTime createTime;
     /**
-     * 病害名称
-     */
-    private String diseaseName;
-    /**
-     * 原因
-     */
-    private String pathogeny;
-
-    /**
-     * 症状
-     */
-    private String symptom;
-
-    /**
-     * 治疗方法
-     */
-    private String treatment;
-
-
-    /**
      * 正常操作表id
      */
     private Long oId;
+    /**
+     * 正常操作表id
+     */
+    private Long adId;
 
     /**
      * 治疗状态（0：治好 1：治疗中）

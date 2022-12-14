@@ -1,6 +1,5 @@
 package com.breed.govern.service.impl;
 
-import com.breed.govern.dto.vo.ExcInfoDisease;
 import com.breed.govern.entity.BExcSummary;
 import com.breed.govern.mapper.BExcSummaryMapper;
 import com.breed.govern.service.IBExcSummaryService;
@@ -21,7 +20,7 @@ import java.util.List;
 public class BExcSummaryServiceImpl extends ServiceImpl<BExcSummaryMapper, BExcSummary> implements IBExcSummaryService {
 
     @Override
-    public ExcInfoDisease getSummaryByLabel(String data) {
+    public long getSummaryByLabel(String data) {
         return baseMapper.getSummaryByLabel(data);
     }
 

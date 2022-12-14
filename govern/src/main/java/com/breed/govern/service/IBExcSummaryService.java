@@ -1,6 +1,5 @@
 package com.breed.govern.service;
 
-import com.breed.govern.dto.vo.ExcInfoDisease;
 import com.breed.govern.entity.BExcSummary;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -16,7 +15,7 @@ import java.util.List;
  */
 public interface IBExcSummaryService extends IService<BExcSummary> {
 
-    ExcInfoDisease getSummaryByLabel(String data);
+    long getSummaryByLabel(String data);
 
     List<BExcSummary> getSummaryList();
 

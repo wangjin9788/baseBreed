@@ -1,11 +1,8 @@
 package com.breed.govern.mapper;
 
-import com.breed.govern.dto.vo.ExcInfoDisease;
 import com.breed.govern.entity.BExcSummary;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
-
-import java.util.List;
 
 /**
  * <p>
@@ -17,5 +14,5 @@ import java.util.List;
  */
 public interface BExcSummaryMapper extends BaseMapper<BExcSummary> {
 
-    ExcInfoDisease getSummaryByLabel(@Param(value = "data")String data);
+    long getSummaryByLabel(@Param(value = "data")String data);
 }

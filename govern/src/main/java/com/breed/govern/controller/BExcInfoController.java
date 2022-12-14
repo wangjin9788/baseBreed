@@ -3,15 +3,11 @@ package com.breed.govern.controller;
 
 import com.breed.govern.common.api.CommonResult;
 import com.breed.govern.dto.vo.ExcInfoList;
-import com.breed.govern.entity.BExcLabel;
 import com.breed.govern.service.IBExcInfoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,5 +31,10 @@ public class BExcInfoController {
     @GetMapping("/list")
     public CommonResult<List<ExcInfoList>> getExcInfoList(){
         return  CommonResult.success(infoService.getExcInfoList());
+    }
+
+    @PostMapping("/update/status/{eId}")
+    public CommonResult updateStatusAndInsertSummary(@PathVariable Integer eId){
+        return  CommonResult.success(infoService.updateStatusAndInsertSummary(eId));
     }
 }

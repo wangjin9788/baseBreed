@@ -4,6 +4,7 @@
     <el-form :model="feedInfo"
              ref="feedInfoFrom"
              label-width="150px">
+      <el-form-item
       <el-form-item v-show="false" label="id：" prop="feedInfo" isEdit>
         <el-input v-model.trim="feedInfo.fId"></el-input>
       </el-form-item>

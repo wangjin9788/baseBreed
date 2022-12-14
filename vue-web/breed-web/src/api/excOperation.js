@@ -30,6 +30,12 @@ export function getExcOperationInfo(id) {
     method: 'get'
   })
 }
+export function getSummaryOperationInfo(id) {
+  return request({
+    url: '/exc-operation/summary/operation/' + id,
+    method: 'get'
+  })
+}
 
 export function deleteExcOperation(id) {
   return request({

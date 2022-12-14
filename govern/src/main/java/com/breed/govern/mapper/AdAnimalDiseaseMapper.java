@@ -1,7 +1,6 @@
 package com.breed.govern.mapper;
 
 import com.breed.govern.dto.vo.AdNatureListVo;
-import com.breed.govern.dto.vo.ExcInfoDisease;
 import com.breed.govern.entity.AdAnimalDisease;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
@@ -19,5 +18,5 @@ import java.util.List;
 public interface AdAnimalDiseaseMapper extends BaseMapper<AdAnimalDisease> {
     List<AdNatureListVo> getAdAnimalDiseaseList();
 
-    ExcInfoDisease getDiseaseExcInfo(@Param(value = "data")String data);
+    long  getDiseaseExcInfo(@Param(value = "data")String data);
 }

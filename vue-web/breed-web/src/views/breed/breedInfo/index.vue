@@ -19,12 +19,14 @@
         </el-button>
       </div>
       <div style="margin-top: 15px">
-        <el-form :inline="true" :model="listQuery" size="small" label-width="140px">
-          <el-form-item label="输入搜索：">
-            <el-date-picker v-model="listQuery.selectDay" type="date" placeholder="选择日" @change="handleResetSearch"
-                            value-format="yyyy-MM-dd"></el-date-picker>
-          </el-form-item>
-        </el-form>
+        <el-select v-model="listQuery.status" placeholder="请选择模型" >
+          <el-option
+            v-for="item in queryStatusData"
+            :key="item.status"
+            :label="item.value"
+            :value="item.status">
+          </el-option>
+        </el-select>
       </div>
     </el-card>
     <el-card class="operate-container" shadow="never">
@@ -79,10 +81,11 @@
         <el-table-column label="养殖状态" width="100" align="center">
           <template slot-scope="scope">
             <el-switch
-              @change="handleStatusChange(scope.$index, scope.row)"
+              @change="handleUpdateStatus(scope.$index, scope.row)"
               :active-value="1"
               :inactive-value="0"
-              v-model="scope.row.status">
+              v-model="scope.row.status"
+              :disabled="scope.row.status==1?true:false">
             </el-switch>
           </template>
         </el-table-column>
@@ -111,10 +114,10 @@
               </el-button>
               <el-button size="mini"
                          type="text"
-                         @click="handleMeasure(scope.$index, scope.row)">生长检查信息
+                         @click="handleOutInfo(scope.$index, scope.row)">产出信息
               </el-button>
             </el-row>
-           <>
+            <>
           </template>
         </el-table-column>
         <el-table-column label="操作" width="160" align="center">
@@ -154,7 +157,8 @@ import {fetchList, deleteBreed} from '@/api/breedInfo';
 const defaultListQuery = {
   pageNum: 1,
   pageSize: 5,
-  selectDay: ''
+  selectDay: '',
+  status: 0
 };
 export default {
 
@@ -164,16 +168,18 @@ export default {
       list: null,
       total: null,
       listLoading: false,
+      queryStatusData:[{status:0, value:'养殖中'},{status:1, value:'养殖结束'}],
     }
   },
   created() {
+
     this.getList();
   },
 
   methods: {
-    back(row){
-      if(row.breedMark==0){
-          return 'selectClass';
+    back(row) {
+      if (row.breedMark == 0) {
+        return 'selectClass';
       }
     },
     /**搜索结果 **/
@@ -215,6 +221,15 @@ export default {
     /**检测信息跳转 **/
     handleTreatment(index, row) {
       this.$router.push({path: '/breed/excInfo', query: {bid: row.bid}});
+    },
+
+    /**检测信息跳转 **/
+    handleUpdateStatus(index, row) {
+      this.$router.push({path: '/breed/addBreedOut', query: {bid: row.bid}});
+    },
+    /**检测信息跳转 **/
+    handleOutInfo(index, row) {
+      this.$router.push({path: '/breed/breedOut', query: {bid: row.bid}});
     },
     /** 删除页面**/
     handleDelete(index, row) {

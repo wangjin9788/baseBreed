@@ -3,6 +3,7 @@ package com.breed.govern.controller;
 
 import com.breed.govern.common.api.CommonResult;
 import com.breed.govern.dto.vo.ExcOperationListVo;
+import com.breed.govern.dto.vo.GetExcOperationInfo;
 import com.breed.govern.entity.BExcOperation;
 import com.breed.govern.service.IBExcOperationService;
 import io.swagger.annotations.Api;
@@ -74,5 +75,11 @@ public class BExcOperationController {
     public CommonResult<BExcOperation> getExcOperationById(@PathVariable Integer id) {
         return CommonResult.success(excOperationService.getExcOperationById(id));
     }
+    @ApiOperation("根据Eid获取操作标签信息")
+    @GetMapping(value = "/summary/operation/{id}")
+    public CommonResult<List<GetExcOperationInfo>> getExcOperationByEid(@PathVariable Integer id) {
+        return CommonResult.success(excOperationService.getExcOperationByEid(id));
+    }
+
 
 }

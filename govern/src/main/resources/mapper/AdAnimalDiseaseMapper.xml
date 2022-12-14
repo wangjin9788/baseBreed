@@ -14,11 +14,8 @@
         ad_animal_disease d
             left JOIN ad_nature n on d.n_id=n.n_id
 </select>
-    <select id="getDiseaseExcInfo" resultType="com.breed.govern.dto.vo.ExcInfoDisease">
-        SELECT a.disease_name as diseaseName,
-            a.pathogeny,
-            a.symptom,
-            a.treatment
+    <select id="getDiseaseExcInfo" resultType="long">
+        SELECT a.ad_id as adId
         FROM
             ad_animal_disease a
         WHERE

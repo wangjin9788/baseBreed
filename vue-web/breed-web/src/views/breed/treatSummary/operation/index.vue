@@ -29,13 +29,8 @@
     <el-card class="operate-container" shadow="never">
       <i class="el-icon-tickets"></i>
       <span>数据列表</span>
-      <el-button
-        type="primary"
-        class="btn-add"
-        @click="handleAdd()"
-        size="mini">
-        添加
-      </el-button>
+
+
     </el-card>
     <div class="table-container">
       <el-table ref="revenueTable"
@@ -45,40 +40,13 @@
         <el-table-column label="编号" width="100" align="center" >
           <template slot-scope="scope">{{ scope.row.eoId }}</template>
         </el-table-column>
-        <el-table-column label="症状" align="center">
-          <template slot-scope="scope">
-          <span v-html="scope.row.symptom"></span>
-          </template>
-        </el-table-column>
+
         <el-table-column label="操作内容" align="center">
-          <template slot-scope="scope">
-          <span v-html="scope.row.operation"></span>
-          </template>
+          <template slot-scope="scope">{{ scope.row.operation }}</template>
         </el-table-column>
-        <el-table-column label="评价" align="center">
-          <template slot-scope="scope">
-            <span v-if="scope.row.operation==0">较差</span>
-            <span v-else-if="scope.row.operation==1">一般</span>
-            <span v-else>良好</span>
-          </template>
-        </el-table-column>
-        <el-table-column label="操作时间" align="center">
+
+        <el-table-column label="创建时间" align="center">
           <template slot-scope="scope">{{ scope.row.createTime }}</template>
-        </el-table-column>
-        <el-table-column label="操作" width="160" align="center">
-          <template slot-scope="scope">
-            <el-row>
-              <el-button
-                size="mini"
-                type="text"
-                @click="handleUpdate(scope.$index, scope.row)">编辑
-              </el-button>
-              <el-button size="mini"
-                         type="text"
-                         @click="handleDelete(scope.$index, scope.row)">删除
-              </el-button>
-            </el-row>
-          </template>
         </el-table-column>
       </el-table>
     </div>
@@ -97,13 +65,13 @@
   </div>
 </template>
 <script>
-import {fetchList, deleteExcOperation} from '@/api/excOperation';
+
+import {getSummaryOperationInfo} from '@/api/excOperation';
 
 const defaultListQuery = {
   pageNum: 1,
   pageSize: 5,
   selectDay:'',
-  eid:0,
 };
 export default {
 
@@ -113,13 +81,10 @@ export default {
       list: null,
       total: null,
       listLoading: false,
-
     }
   },
   created() {
-
     this.getList();
-
   },
 
   methods: {
@@ -144,43 +109,16 @@ export default {
       this.listQuery.pageNum = val;
       this.getList();
     },
-    /**跳转添加标签 **/
-    handleAdd() {
-      this.$router.push({path: '/breed/addExcOperation'});
-    },
     /**跳转编辑 **/
-    handleUpdate(index, row) {
-      this.$router.push({path: '/breed/updateExcOperation', query: {id: row.eoId}});
-    },
-
-    /** 删除页面**/
-    handleDelete(index, row) {
-      this.$confirm('是否要删除该养殖记录?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(() => {
-        deleteExcOperation(row.eoId).then(response => {
-          this.$message({
-            type: 'success',
-            message: '删除成功!'
-          });
-          this.getList();
-        });
-      });
+    handleSummaryOperation(index, row) {
+      this.$router.push({path: '/breed/summaryOperationInfo', query: {id: row.eId}});
     },
     /**
      * 加载页面数据
      */
     getList() {
       this.listLoading = true;
-      //获取当前时间
-      var now = new Date();
-      var monthn = now.getMonth() + 1;
-      var yearn = now.getFullYear();
-      this.selectDay = yearn + "-" + monthn;
-      this.listQuery.eid=this.$route.query.eid;
-      fetchList(this.listQuery).then(response => {
+      getSummaryOperationInfo(this.$route.query.id).then(response => {
         this.listLoading = false;
         this.list = response.data;
         this.total = response.data.total;

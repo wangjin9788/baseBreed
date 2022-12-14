@@ -85,6 +85,20 @@ export const asyncRouterMap = [
         hidden: true
       },
       {
+        path: 'breedOut',
+        name: 'breedOut',
+        component: () => import('@/views/breed/breedInfo/breedOut/index'),
+        meta: {title: '养殖结束列表'},
+        hidden: true
+      },
+      {
+        path: 'addBreedOut',
+        name: 'addBreedOut',
+        component: () => import('@/views/breed/breedInfo/breedOut/addOutInfo'),
+        meta: {title: '添加养殖结束'},
+        hidden: true
+      },
+      {
         path: 'operation',
         name: 'operation',
         component: () => import('@/views/breed/operation/index'),
@@ -161,6 +175,13 @@ export const asyncRouterMap = [
         meta: {title: '治疗总结',icon: 'product-comment'}
       },
       {
+        path: 'summaryOperationInfo',
+        name: 'summaryOperationInfo',
+        component: () => import('@/views/breed/treatSummary/operation/index'),
+        meta: {title: '总结操作信息'},
+        hidden: true
+      },
+      {
         path: 'excInfo',
         name: 'excInfo',
         component: () => import('@/views/breed/excInfo/index'),
@@ -188,6 +209,7 @@ export const asyncRouterMap = [
         meta: {title: '修改治疗操作信息'},
         hidden: true
       },
+
     ]
   },
   {
@@ -208,6 +230,12 @@ export const asyncRouterMap = [
         name: 'ferment',
         component: () => import('@/views/feed/ferment/index'),
         meta: {title: '发酵管理', icon: 'pay'},
+      },
+      {
+        path: 'cla',
+        name: 'cla',
+        component: () => import('@/views/feed/nutritionCla/index'),
+        meta: {title: '营养计算', icon: 'pay'},
       },
       {
         path: 'addFeedInfo',

@@ -1,6 +1,7 @@
 package com.breed.govern.mapper;
 
 import com.breed.govern.dto.vo.ExcOperationListVo;
+import com.breed.govern.dto.vo.GetExcOperationInfo;
 import com.breed.govern.entity.BExcOperation;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
@@ -18,4 +19,8 @@ import java.util.List;
 public interface BExcOperationMapper extends BaseMapper<BExcOperation> {
 
     List<ExcOperationListVo> getExcOperationList(@Param(value = "id")long id);
+
+    String getOperationByeId(@Param(value = "eId")long eId);
+
+    List<GetExcOperationInfo> getExcOperationByEid(@Param(value = "eId")long eId);
 }

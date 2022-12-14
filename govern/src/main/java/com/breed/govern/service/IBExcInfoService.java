@@ -3,6 +3,7 @@ package com.breed.govern.service;
 import com.breed.govern.dto.vo.ExcInfoList;
 import com.breed.govern.entity.BExcInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.breed.govern.entity.BExcSummary;
 
 import java.util.List;
 
@@ -16,4 +17,7 @@ import java.util.List;
  */
 public interface IBExcInfoService extends IService<BExcInfo> {
     List<ExcInfoList> getExcInfoList();
+
+    int updateStatusAndInsertSummary( Integer eId);
+
 }

@@ -48,6 +48,9 @@
         <el-table-column label="编号" width="100" align="center" >
           <template slot-scope="scope">{{ scope.row.esId }}</template>
         </el-table-column>
+        <el-table-column label="异常信息编号" width="100" align="center" v-if="false" >
+          <template slot-scope="scope">{{ scope.row.eId }}</template>
+        </el-table-column>
         <el-table-column label="病害名称" align="center">
           <template slot-scope="scope">{{ scope.row.diseaseName }}</template>
         </el-table-column>
@@ -69,7 +72,7 @@
               <el-button
                 size="mini"
                 type="text"
-                @click="handleUpdate(scope.$index, scope.row)">查看治疗过程
+                @click="handleSummaryOperation(scope.$index, scope.row)">查看治疗过程
               </el-button>
             </el-row>
           </template>
@@ -92,6 +95,8 @@
 </template>
 <script>
 import {fetchList} from '@/api/treatSummary';
+
+import {getSummaryOperationInfo} from '@/api/excOperation';
 
 const defaultListQuery = {
   pageNum: 1,
@@ -133,6 +138,10 @@ export default {
     handleCurrentChange(val) {
       this.listQuery.pageNum = val;
       this.getList();
+    },
+    /**跳转编辑 **/
+    handleSummaryOperation(index, row) {
+      this.$router.push({path: '/breed/summaryOperationInfo', query: {id: row.eid}});
     },
     /**
      * 加载页面数据

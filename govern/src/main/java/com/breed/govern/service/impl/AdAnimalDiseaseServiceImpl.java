@@ -1,7 +1,6 @@
 package com.breed.govern.service.impl;
 
 import com.breed.govern.dto.vo.AdNatureListVo;
-import com.breed.govern.dto.vo.ExcInfoDisease;
 import com.breed.govern.entity.AdAnimalDisease;
 import com.breed.govern.mapper.AdAnimalDiseaseMapper;
 import com.breed.govern.service.IAdAnimalDiseaseService;
@@ -47,7 +46,7 @@ public class AdAnimalDiseaseServiceImpl extends ServiceImpl<AdAnimalDiseaseMappe
     }
 
     @Override
-    public ExcInfoDisease getDiseaseExcInfo(String data) {
+    public long getDiseaseExcInfo(String data) {
         return baseMapper.getDiseaseExcInfo(data);
     }
 

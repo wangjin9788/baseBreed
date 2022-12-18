@@ -19,4 +19,6 @@ public interface BOperationLabelMapper extends BaseMapper<BOperationLabel> {
     List<OperationLabelListVo> getOperationLabelList();
 
     List<SelectOperationLabelListVo> SelectOperationLabelListVo();
+
+    Long getOlIdByContent();
 }

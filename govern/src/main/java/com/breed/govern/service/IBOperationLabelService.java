@@ -28,4 +28,6 @@ public interface IBOperationLabelService extends IService<BOperationLabel> {
     Integer deleteOperationLabel(long id);
 
     List<SelectOperationLabelListVo> selectOperationLabelListVo();
+
+    Long getOlIdByContent();
 }

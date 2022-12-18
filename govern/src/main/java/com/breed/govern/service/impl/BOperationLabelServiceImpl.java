@@ -52,4 +52,9 @@ public class BOperationLabelServiceImpl extends ServiceImpl<BOperationLabelMappe
     public List<SelectOperationLabelListVo> selectOperationLabelListVo() {
         return baseMapper.SelectOperationLabelListVo();
     }
+
+    @Override
+    public Long getOlIdByContent() {
+        return baseMapper.getOlIdByContent();
+    }
 }

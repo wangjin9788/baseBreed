@@ -1,9 +1,11 @@
 package com.breed.govern.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.breed.govern.dto.data.OperationBatchData;
 import com.breed.govern.dto.vo.OperationListVo;
 import com.breed.govern.dto.vo.SelectOperationList;
 import com.breed.govern.entity.BOperation;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -28,4 +30,6 @@ public interface IBOperationService extends IService<BOperation> {
     Integer deleteOperation(long id);
 
     List<SelectOperationList>selectOperationList();
+
+    void batchOperation( OperationBatchData batch);
 }

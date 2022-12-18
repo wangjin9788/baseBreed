@@ -17,4 +17,6 @@ public class NutritionClaParam implements Serializable {
     private List<NutritionClaItemParam> results;
     //操作
     private Integer oper;
+    //养殖表id
+    private List<Long> checkedCities;
 }

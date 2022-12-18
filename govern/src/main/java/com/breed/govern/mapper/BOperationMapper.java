@@ -1,5 +1,6 @@
 package com.breed.govern.mapper;
 
+import com.breed.govern.dto.data.OperationBatchData;
 import com.breed.govern.dto.vo.OperationListVo;
 import com.breed.govern.dto.vo.SelectOperationList;
 import com.breed.govern.entity.BOperation;
@@ -21,4 +22,6 @@ public interface BOperationMapper extends BaseMapper<BOperation> {
     List<OperationListVo> getOperationList(@Param(value = "bid") long bid);
 
     List<SelectOperationList>selectOperationList();
+
+    void batchOperation(@Param(value = "batch") OperationBatchData batch);
 }

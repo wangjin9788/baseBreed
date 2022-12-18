@@ -53,7 +53,7 @@ import 'quill/dist/quill.bubble.css';
 const defaultAnimalDisease = {
   pageSize: 100,
   pageNum: 1,
-  selectDay: ''
+  searchName: ''
 };
 export default {
   name: "animalDiseaseDetail",
@@ -81,7 +81,7 @@ export default {
     } else {
       this.animalDisease = Object.assign({}, defaultAnimalDisease);
     }
-    this.getSelectAnimalDiseaseList();
+
   },
   methods: {
     getSelectAnimalDiseaseList() {
@@ -134,7 +134,7 @@ export default {
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();
-      this.animalDisease = Object.assign({}, defaultAnimAlDisease);
+      this.animalDisease = Object.assign({}, defaultAnimalDisease);
       this.getSelectAnimalDiseaseList();
     },
   }

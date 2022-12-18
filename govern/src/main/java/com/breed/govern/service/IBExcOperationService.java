@@ -1,5 +1,6 @@
 package com.breed.govern.service;
 
+import com.breed.govern.dto.data.ExcOperationBatchData;
 import com.breed.govern.dto.vo.ExcOperationListVo;
 import com.breed.govern.dto.vo.GetExcOperationInfo;
 import com.breed.govern.dto.vo.OperationListVo;
@@ -7,6 +8,7 @@ import com.breed.govern.dto.vo.SelectOperationList;
 import com.breed.govern.entity.BExcOperation;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.breed.govern.entity.BOperation;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
@@ -34,5 +36,6 @@ public interface IBExcOperationService extends IService<BExcOperation> {
 
     String getOperationByeId(long eId);
 
+    void batchExcOperation( ExcOperationBatchData batch);
 
 }

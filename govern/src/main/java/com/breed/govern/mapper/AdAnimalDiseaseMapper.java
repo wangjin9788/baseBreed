@@ -16,7 +16,7 @@ import java.util.List;
  * @since 2022-12-04
  */
 public interface AdAnimalDiseaseMapper extends BaseMapper<AdAnimalDisease> {
-    List<AdNatureListVo> getAdAnimalDiseaseList();
+    List<AdNatureListVo> getAdAnimalDiseaseList(@Param(value = "searchName")String searchName);
 
     long  getDiseaseExcInfo(@Param(value = "data")String data);
 }

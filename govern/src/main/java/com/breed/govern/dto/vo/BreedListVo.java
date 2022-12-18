@@ -25,4 +25,6 @@ public class BreedListVo {
     private String inputTime;
     //规格
     private int  specifications;
+    //治疗状态
+    private int excStatus=1;
 }

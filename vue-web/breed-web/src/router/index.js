@@ -41,7 +41,7 @@ export const asyncRouterMap = [
     component: Layout,
     redirect: '/breed/breedInfo',
     name: 'breed',
-    meta: {title: '养殖管理', icon: 'product-comment'},
+    meta: {title: '养殖管理', icon: 'yz'},
     children: [
       {
         path: 'breedInfo',
@@ -217,7 +217,7 @@ export const asyncRouterMap = [
     component: Layout,
     redirect: '/feed',
     name: 'feed',
-    meta: {title: '饲料管理', icon: 'ums'},
+    meta: {title: '饲料管理', icon: 'sl'},
     children: [
       {
         path: 'feedInfo',
@@ -279,6 +279,13 @@ export const asyncRouterMap = [
         meta: {title: '查看发酵结束检测信息'},
         hidden: true
       },
+      {
+        path: 'rate',
+        name: 'rate',
+        component: () => import('@/views/feed/nutritionRate/index'),
+        meta: {title: '查看发酵结束检测信息'},
+        hidden: true
+      },
     ]
   },
   {
@@ -286,7 +293,7 @@ export const asyncRouterMap = [
     component: Layout,
     redirect: '/diseaseInfo',
     name: 'diseaseInfo',
-    meta: {title: '病理管理', icon: 'product-comment'},
+    meta: {title: '病理管理', icon: 'blgl'},
     children: [
       {
         path: 'animalDisease',

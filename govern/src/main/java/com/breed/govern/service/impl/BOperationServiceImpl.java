@@ -1,5 +1,6 @@
 package com.breed.govern.service.impl;
 
+import com.breed.govern.dto.data.OperationBatchData;
 import com.breed.govern.dto.vo.OperationListVo;
 import com.breed.govern.dto.vo.SelectOperationList;
 import com.breed.govern.entity.BOperation;
@@ -53,6 +54,11 @@ public class BOperationServiceImpl extends ServiceImpl<BOperationMapper, BOperat
     @Override
     public List<SelectOperationList> selectOperationList() {
         return baseMapper.selectOperationList();
+    }
+
+    @Override
+    public void batchOperation(OperationBatchData batch) {
+        baseMapper.batchOperation(batch);
     }
 
 

@@ -36,6 +36,11 @@ export function getBreedInfo(id) {
     method: 'get'
   })
 }
+export function getBreedAllId() {
+  return request({
+    url: '/breed/all',
+  })
+}
 
 export function deleteBreed(id) {
   return request({

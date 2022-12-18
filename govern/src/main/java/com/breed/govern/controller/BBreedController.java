@@ -4,9 +4,7 @@ package com.breed.govern.controller;
 import com.breed.govern.common.api.CommonResult;
 import com.breed.govern.dto.vo.BreedListVo;
 import com.breed.govern.entity.BBreed;
-import com.breed.govern.entity.BFeedFerment;
 import com.breed.govern.service.IBBreedService;
-import com.breed.govern.service.impl.BBreedServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,5 +76,10 @@ public class BBreedController {
     @GetMapping(value = "/info/{id}")
     public CommonResult<BBreed> getBreedById(@PathVariable Integer id) {
         return CommonResult.success(breedService.getBreedById(id));
+    }
+    @ApiOperation("获取所有Id")
+    @GetMapping(value = "/all")
+    public CommonResult<List<Long>> getBreedAllId() {
+        return CommonResult.success(breedService.getBreedAllId());
     }
 }

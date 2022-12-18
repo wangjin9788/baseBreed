@@ -3,6 +3,7 @@ package com.breed.govern.mapper;
 import com.breed.govern.dto.vo.ExcInfoList;
 import com.breed.govern.entity.BExcInfo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -16,4 +17,6 @@ import java.util.List;
  */
 public interface BExcInfoMapper extends BaseMapper<BExcInfo> {
    List<ExcInfoList> getExcInfoList();
+
+   List<Long> getEIdByBId(@Param("idList") List<Long> idList);
 }

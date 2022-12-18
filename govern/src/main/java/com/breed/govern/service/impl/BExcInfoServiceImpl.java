@@ -1,6 +1,5 @@
 package com.breed.govern.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.breed.govern.dto.vo.ExcInfoList;
 import com.breed.govern.entity.AdAnimalDisease;
@@ -10,7 +9,6 @@ import com.breed.govern.mapper.AdAnimalDiseaseMapper;
 import com.breed.govern.mapper.BExcInfoMapper;
 import com.breed.govern.mapper.BExcOperationMapper;
 import com.breed.govern.mapper.BExcSummaryMapper;
-import com.breed.govern.service.IAdAnimalDiseaseService;
 import com.breed.govern.service.IBExcInfoService;
 import org.springframework.stereotype.Service;
 
@@ -67,5 +65,10 @@ public class BExcInfoServiceImpl extends ServiceImpl<BExcInfoMapper, BExcInfo> i
             return byId;
         }
         return 0;
+    }
+
+    @Override
+    public List<Long> getEIdByBId(List<Long> idList) {
+        return baseMapper.getEIdByBId(idList);
     }
 }

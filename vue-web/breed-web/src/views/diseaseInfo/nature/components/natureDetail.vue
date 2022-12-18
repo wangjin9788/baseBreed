@@ -10,7 +10,7 @@
         <el-input v-model.trim="nature.nature"></el-input>
       </el-form-item>
       <el-form-item label="病理说明：" prop="nature" isEdit>
-        <el-input  type="textarea" v-model.trim="nature.natureExplain"></el-input>
+        <quill-editor v-model="nature.natureExplain" :options="quillOption"></quill-editor>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit('natureFrom')">提交</el-button>
@@ -22,7 +22,7 @@
 
 <script>
 import {getNatureInfo, fetchList, updateNature, createNature} from '@/api/nature';
-import SingleUpload from '@/components/Upload/singleUpload';
+import {quillEditor} from "vue-quill-editor"; //调用编辑器
 const defaultNature = {
   pageSize: 100,
   pageNum: 1,
@@ -31,7 +31,7 @@ const defaultNature = {
 };
 export default {
   name: "natureDetail",
-  components: {SingleUpload},
+  components: {quillEditor},
   props: {
     isEdit: {
       type: Boolean,

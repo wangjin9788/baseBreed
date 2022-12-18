@@ -21,7 +21,7 @@
       <div style="margin-top: 15px">
         <el-form :inline="true" :model="listQuery" size="small" label-width="140px">
           <el-form-item label="输入搜索：">
-            <el-date-picker v-model="listQuery.selectDay" type="date" placeholder="选择日期"  value-format="yyyy-MM-dd"></el-date-picker>
+          <el-input v-model="listQuery.searchName" placeholder="请输入查询关键字" ></el-input>
           </el-form-item>
         </el-form>
       </div>
@@ -41,7 +41,8 @@
       <el-table ref="revenueTable"
                 :data="list"
                 style="width: 100%;"
-                v-loading="listLoading" border>
+                v-loading="listLoading" border
+                :row-class-name="tableRowClassName">
         <el-table-column label="编号" width="100" align="center" >
           <template slot-scope="scope">{{ scope.row.adId }}</template>
         </el-table-column>
@@ -54,12 +55,12 @@
 
         <el-table-column label="病因" align="center">
           <template slot-scope="scope" >
-            <span v-html="scope.row.pathogeny"></span>
+            <span v-html="showDate(scope.row.pathogeny)"></span>
           </template>
         </el-table-column>
         <el-table-column label="症状" align="center">
           <template slot-scope="scope">
-          <span v-html="scope.row.symptom"></span>
+          <span v-html="showDate(scope.row.symptom)"></span>
           </template>
         </el-table-column>
         <el-table-column label="治疗方法" align="center">
@@ -105,14 +106,12 @@
 </template>
 <script>
 import {fetchList, deleteAnimalDisease} from '@/api/animalDisease';
-
 const defaultListQuery = {
   pageNum: 1,
   pageSize: 5,
-  selectDay:'',
+  searchName:'',
 };
 export default {
-
   data() {
     return {
       listQuery: Object.assign({}, defaultListQuery),
@@ -177,21 +176,46 @@ export default {
      */
     getList() {
       this.listLoading = true;
-      //获取当前时间
-      var now = new Date();
-      var monthn = now.getMonth() + 1;
-      var yearn = now.getFullYear();
-      this.selectDay = yearn + "-" + monthn;
       fetchList(this.listQuery).then(response => {
         this.listLoading = false;
         this.list = response.data;
         this.total = response.data.total;
       });
 
+    },
+    /** 改变颜色**/
+    tableRowClassName({row, rowIndex}) {
+      if (row.excStatus === 0) {
+        return 'warning-row';
+      } else if (row.excStatus === 1) {
+        return 'success-row';
+      }
+      return '';
+    },
+    // 筛选变色
+    showDate(val) {
+      val = val + '';
+      console.log(this.listQuery.searchName )
+      if ( this.listQuery.searchName != '') {
+        console.log("*********************")
+        return val.replace(this.listQuery.searchName, '<font color="#409EFF">' + this.listQuery.searchName + '</font>')
+      } else {
+        console.log("---------------")
+        return val
+      }
     }
   }
 }
 </script>
-<style></style>
+<style>
+
+.el-table .warning-row {
+  background: rgba(253, 230, 231, 0.08);
+}
+
+.el-table .success-row {
+  background: #ecf9eb;
+}
+</style>
 
 

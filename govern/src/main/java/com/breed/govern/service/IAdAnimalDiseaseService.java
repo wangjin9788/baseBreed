@@ -24,7 +24,7 @@ public interface IAdAnimalDiseaseService extends IService<AdAnimalDisease> {
 
     AdAnimalDisease getAdAnimalDiseaseById(Integer id);
 
-    List<AdNatureListVo> getAdAnimalDiseaseList();
+    List<AdNatureListVo> getAdAnimalDiseaseList(String searchName);
 
     long getDiseaseExcInfo(String data);
 }

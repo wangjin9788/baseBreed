@@ -1,14 +1,44 @@
 <template>
-  <el-card >
+  <el-card>
     <el-form :model="cla"
              ref="claFrom"
              label-width="150px">
+      <el-card class="operate-container" shadow="never">
+        <i class="el-icon-tickets"></i>
+        <span>比例添加</span>
+
+        <el-button
+          style="float:right;margin-right: 15px"
+          type="primary"
+          class="btn-add"
+          @click="handleAddRate()"
+          size="mini">
+          添加比例
+        </el-button>
+      </el-card>
       <el-form-item label="操作">
-        <div>
-          <el-radio v-model="cla.oper" label="1" border>普通操作</el-radio>
-          <el-radio v-model="cla.oper" label="2" border>治疗操作</el-radio>
-        </div>
+        <el-row :gutter="20">
+          <el-col :span="10">
+            <div>
+              <el-radio v-model="cla.oper" label="1" border>普通操作</el-radio>
+              <el-radio v-model="cla.oper" label="2" border>治疗操作</el-radio>
+            </div>
+          </el-col>
+          <el-col :span="10">
+            <div>
+              <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选
+              </el-checkbox>
+              <div style="margin: 15px 0;"></div>
+              <el-checkbox-group v-model="cla.checkedCities" @change="handleCheckedCitiesChange">
+                <el-checkbox v-for="city in cityOptions"
+                             :label="city"
+                             :key="city">{{ city }}</el-checkbox>
+              </el-checkbox-group>
+            </div>
+          </el-col>
+        </el-row>
       </el-form-item>
+
       <el-row :gutter="20">
         <el-col :span="5">
           <el-form-item
@@ -34,7 +64,9 @@
             :label="'比例' + index"
             :key="rate.key"
             :prop="'rates.' + index + '.value'">
-            <el-cascader :options="options" v-model="rate.value" clearable></el-cascader>
+            <el-cascader :options="selectRateLists"
+                         v-model="rate.value"
+                         clearable></el-cascader>
           </el-form-item>
         </el-col>
         <el-col :span="5">
@@ -43,7 +75,7 @@
             :label="'结果' + index"
             :key="reusl.key"
             :prop="'domains.' + index + '.value'">
-            <el-input v-model="reusl.value"  readonly ></el-input>
+            <el-input v-model="reusl.value" readonly></el-input>
           </el-form-item>
         </el-col>
       </el-row>
@@ -58,8 +90,9 @@
 </template>
 
 <script>
-import { createNutritionCla} from '@/api/nutritionCla';
-
+import {createNutritionCla} from '@/api/nutritionCla';
+import {fetchList} from '@/api/rate';
+import {getBreedAllId} from '@/api/breedInfo';
 const defaultcla = {
   pageSize: 100,
   pageNum: 1,
@@ -68,7 +101,9 @@ const defaultcla = {
   rates: [{}],
   results: [{}],
   mediums: [{}],
-  oper:'1'
+  oper: '1',
+  checkedCities: [],
+
 };
 export default {
   name: "claDetail",
@@ -81,16 +116,19 @@ export default {
   data() {
     return {
       cla: Object.assign({}, defaultcla),
-      options: [{value: '蛋白质', label: '蛋白质', children: [{value: 5, label: '5%'}]}, {
-        value: '葡萄糖',
-        label: '葡萄糖',
-        children: [{value: 15, label: '15%'}]
-      }]
-
+      selectRateLists: fetchList().then(response => {
+        this.selectRateLists = response.data;
+      }),
+      cityOptions: getBreedAllId().then(response => {
+        this.cityOptions  = response.data;
+      }),
+      checkAll: false,
+      isIndeterminate: true,
     }
   },
   created() {
     this.cla.ffId = this.$route.query.id
+
   },
   methods: {
     removeDomain(item) {
@@ -122,7 +160,10 @@ export default {
       fetchList(0, this.cla).then(response => {
         this.selectclaList = response.data;
       });
-
+    },
+    /**跳转添加标签 **/
+    handleAddRate() {
+      this.$router.push({path: '/feed/rate'});
     },
     onSubmit(formName) {
       this.$refs[formName].validate((valid) => {
@@ -133,16 +174,16 @@ export default {
             type: 'warning'
           }).then(() => {
             createNutritionCla(this.cla).then(response => {
-                this.$refs[formName].resetFields();
-                this.resetForm(formName);
-                this.$message({
-                  message: '提交成功',
-                  type: 'success',
-                  duration: 1000
-                });
+              this.$refs[formName].resetFields();
+              this.resetForm(formName);
+              this.$message({
+                message: '提交成功',
+                type: 'success',
+                duration: 1000
+              });
 
               cla: Object.assign({}, defaultcla)
-              });
+            });
 
           });
 
@@ -162,8 +203,7 @@ export default {
       this.getSelectclaList();
     },
     getResult(cla) {
-      console.log(cla.domains)
-      if (cla.domains != undefined && cla.rates != undefined ) {
+      if (cla.domains != undefined && cla.rates != undefined) {
         let res = 0;
         for (let i = 0; i < this.cla.domains.length; i++) {
           console.log(this.cla.domains[i].value)
@@ -173,8 +213,17 @@ export default {
               this.$set(this.cla.results, i, {value: res.toFixed(1)})
           }
         }
-        console.log(this.cla.results)
       }
+    },
+    handleCheckAllChange(val) {
+      console.log(this.cityOptions)
+      this.cla.checkedCities = val ? this.cityOptions : [];
+      this.isIndeterminate = false;
+    },
+    handleCheckedCitiesChange(value) {
+      let checkedCount = value.length;
+      this.checkAll = checkedCount === this.cityOptions.length;
+      this.isIndeterminate = checkedCount > 0 && checkedCount < this.cityOptions.length;
     }
   }
 }

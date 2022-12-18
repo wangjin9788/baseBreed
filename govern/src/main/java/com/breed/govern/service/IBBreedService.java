@@ -26,4 +26,7 @@ public interface IBBreedService extends IService<BBreed> {
 
     Integer deleteBreed(long id);
 
+    List<Long> getBreedAllId();
+
+
 }

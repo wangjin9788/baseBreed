@@ -1,5 +1,7 @@
 package com.breed.govern.mapper;
 
+import com.breed.govern.dto.data.ExcOperationBatchData;
+import com.breed.govern.dto.data.OperationBatchData;
 import com.breed.govern.dto.vo.ExcOperationListVo;
 import com.breed.govern.dto.vo.GetExcOperationInfo;
 import com.breed.govern.entity.BExcOperation;
@@ -23,4 +25,7 @@ public interface BExcOperationMapper extends BaseMapper<BExcOperation> {
     String getOperationByeId(@Param(value = "eId")long eId);
 
     List<GetExcOperationInfo> getExcOperationByEid(@Param(value = "eId")long eId);
+
+    void batchExcOperation(@Param(value = "batch") ExcOperationBatchData batch);
+
 }

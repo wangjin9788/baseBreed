@@ -1,5 +1,6 @@
 package com.breed.govern.service.impl;
 
+import com.breed.govern.dto.data.ExcOperationBatchData;
 import com.breed.govern.dto.vo.ExcOperationListVo;
 import com.breed.govern.dto.vo.GetExcOperationInfo;
 import com.breed.govern.entity.BExcOperation;
@@ -57,5 +58,10 @@ public class BExcOperationServiceImpl extends ServiceImpl<BExcOperationMapper, B
 
     public String getOperationByeId(long eId){
         return baseMapper.getOperationByeId(eId);
+    }
+
+    @Override
+    public void batchExcOperation(ExcOperationBatchData batch) {
+        baseMapper.batchExcOperation(batch);
     }
 }

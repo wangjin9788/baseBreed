@@ -18,4 +18,5 @@ import java.util.List;
  */
 public interface BBreedMapper extends BaseMapper<BBreed> {
     List<BreedListVo> getBreedInfoList(Page<BreedListVo> page, @Param(value = "status") Integer status, @Param(value = "type")Integer type);
+    List<Long> getBreedAllId();
 }

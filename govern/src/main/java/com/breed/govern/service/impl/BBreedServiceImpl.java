@@ -46,4 +46,9 @@ public class BBreedServiceImpl extends ServiceImpl<BBreedMapper, BBreed> impleme
     public Integer deleteBreed(long id) {
         return  baseMapper.deleteById(id);
     }
+
+    @Override
+    public List<Long> getBreedAllId() {
+        return baseMapper.getBreedAllId();
+    }
 }

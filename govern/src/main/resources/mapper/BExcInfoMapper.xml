@@ -22,4 +22,20 @@
                  LEFT JOIN ad_animal_disease ad ON ad.ad_id = i.ad_id
         ORDER BY i.create_time DESC
     </select>
+    <select id="getEIdByBId" resultType="long">
+        SELECT
+            e_id
+        FROM
+            b_exc_info
+        WHERE
+            `status` = 0
+            and b_id in
+        <foreach collection="idList" item="id" index="index"
+                 open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+        ORDER BY
+            create_time DESC
+            LIMIT 1
+    </select>
 </mapper>

@@ -41,8 +41,8 @@ public class AdAnimalDiseaseServiceImpl extends ServiceImpl<AdAnimalDiseaseMappe
     }
 
     @Override
-    public List<AdNatureListVo> getAdAnimalDiseaseList() {
-        return baseMapper.getAdAnimalDiseaseList();
+    public List<AdNatureListVo> getAdAnimalDiseaseList(String searchName) {
+        return baseMapper.getAdAnimalDiseaseList(searchName);
     }
 
     @Override

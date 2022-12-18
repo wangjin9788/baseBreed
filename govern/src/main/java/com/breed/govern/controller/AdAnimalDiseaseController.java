@@ -3,10 +3,7 @@ package com.breed.govern.controller;
 
 import com.breed.govern.common.api.CommonResult;
 import com.breed.govern.dto.vo.AdNatureListVo;
-import com.breed.govern.dto.vo.BreedModelListVo;
-import com.breed.govern.dto.vo.SelectBreedModelListVo;
 import com.breed.govern.entity.AdAnimalDisease;
-import com.breed.govern.entity.BBreedingMode;
 import com.breed.govern.service.IAdAnimalDiseaseService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -33,8 +30,8 @@ public class AdAnimalDiseaseController {
 
     @ApiOperation("获取模型列表")
     @GetMapping("/list")
-    public CommonResult<List<AdNatureListVo>> getModelList(){
-        return  CommonResult.success(diseaseService.getAdAnimalDiseaseList());
+    public CommonResult<List<AdNatureListVo>> getModelList(@RequestParam(value = "searchName") String searchName){
+        return  CommonResult.success(diseaseService.getAdAnimalDiseaseList(searchName));
     }
 
     @ApiOperation("新建病理信息")

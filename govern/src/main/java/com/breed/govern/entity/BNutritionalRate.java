@@ -9,35 +9,31 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 病害性质
+ * 营养比例表
  * </p>
  *
  * @author 王进
- * @since 2022-12-04
+ * @since 2022-12-17
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class AdNature implements Serializable {
+public class BNutritionalRate implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * 病害性质
-     */
-    @TableId(value = "n_id", type = IdType.AUTO)
-    private Long nId;
+    @TableId(value = "nr_id", type = IdType.AUTO)
+    private Integer nrId;
 
     /**
-     * 性质
+     * 营养品名称
      */
-    private String nature;
+    private String nutName;
 
     /**
-     * 说明
+     * 比例
      */
-
-    private String natureExplain;
+    private Double rate;
 
 
 }
